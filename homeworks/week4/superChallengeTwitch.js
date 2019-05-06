@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 /* eslint-disable comma-dangle */
 /* eslint-disable prefer-destructuring */
 /* eslint-disable arrow-parens */
@@ -5,6 +6,8 @@ const rp = require('request-promise-native');
 const process = require('process');
 
 const maxLimit = 100; // 100
+const topNumber = 300;
+let reqTimes = topNumber / maxLimit;
 let gameId;
 // let cnt = 0;
 
@@ -15,17 +18,25 @@ const options = {
   }
 };
 
-function getTopStream(body) {
-  const topStreams = JSON.parse(body).data;
-  for (let i = 0; i < topStreams.length; i += 1) {
-    console.log(topStreams[i].user_name, topStreams[i].id);
-    // console.log((cnt += 1));
+function printStreamInfo(body) {
+  if (reqTimes > 0) {
+    reqTimes--;
+    const topStreams = JSON.parse(body).data;
+    for (let i = 0; i < topStreams.length; i += 1) {
+      console.log(topStreams[i].user_name, topStreams[i].id);
+      // console.log((cnt += 1));
+    }
+    const {
+      pagination: { cursor }
+    } = JSON.parse(body);
+    options.url = `https://api.twitch.tv/helix/streams?game_id=${gameId}&first=${maxLimit}&after=${cursor}`;
+    return rp(options)
+      .then(printStreamInfo)
+      .catch(error => {
+        console.log(error);
+      });
   }
-  const {
-    pagination: { cursor }
-  } = JSON.parse(body);
-  options.url = `https://api.twitch.tv/helix/streams?game_id=${gameId}&first=${maxLimit}&after=${cursor}`;
-  return rp(options);
+  return 1;
 }
 
 rp(options)
@@ -34,8 +45,7 @@ rp(options)
     options.url = `https://api.twitch.tv/helix/streams?game_id=${gameId}&first=${maxLimit}`;
     return rp(options);
   })
-  .then(getTopStream)
-  .then(getTopStream)
+  .then(printStreamInfo)
   .catch(error => {
     console.log(error);
   });
