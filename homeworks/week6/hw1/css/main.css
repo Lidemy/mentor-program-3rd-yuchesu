@@ -1,0 +1,80 @@
+* {
+  margin: 0;
+}
+
+ul {
+  height: 45px;
+  background: rgb(43, 36, 36);
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul li {
+  display: inline-block;
+  color: rgb(108, 111, 114);
+  margin: 0 5px;
+  padding: 5px;
+}
+
+.navbar {
+  margin-left: 15px;
+  font-weight: bolder;
+  font-size: 25px;
+  color: white;
+}
+
+.head {
+  background: rgb(197, 193, 193);
+  padding: 40px 100px;
+}
+
+.head h2 {
+  weight: bold;
+  font-size: 60px;
+}
+
+.content {
+  width: 24%;
+  margin: 80px 1%;
+  padding-left: 6%;
+  float: left;
+}
+
+hr {
+  width: 88%;
+  margin: 0 auto;
+}
+
+footer {
+  display: inline-block;
+  margin-top: 8px;
+  margin-left: 6%;
+}
+
+.head input {
+  background: rgb(14, 112, 223);
+  padding: 12px 6px;
+  margin: 8px 0px;
+  width: 150px;
+  text-align: center;
+  color: white;
+  font-size: 15px;
+}
+
+.content input {
+  background: rgb(100, 108, 116);
+  padding: 10px 4px;
+  margin-top: 8px;
+  width: 130px;
+  text-align: center;
+  color: white;
+  font-size: 15px;
+}
+
+@media screen and (max-width: 768px) {
+  .content {
+    display: block;
+    width: 100%;
+  }
+}
