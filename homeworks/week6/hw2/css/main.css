@@ -1,0 +1,31 @@
+* {
+  margin: 0;
+}
+
+body {
+  width: 80%;
+  margin: 5px auto;
+}
+
+h1 {
+  margin: 50px 0;
+  font-weight: normal;
+}
+
+p:after {
+  content: '';
+  width: 30px;
+  height: 30px;
+  background: rgb(231, 235, 14);
+  display: inline-block;
+  position: fixed;
+  top: 50%;
+  left: 5%;
+}
+
+@media screen and (max-width: 768px) {
+  p:after {
+    width: 0px;
+    height: 0px;
+  }
+}
